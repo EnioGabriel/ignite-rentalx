@@ -1,4 +1,4 @@
-import Category from "../model/Category";
+import CategoryModel from "../model/Category";
 
 interface ICreateCategoryDTO {
   name: string;
@@ -6,7 +6,7 @@ interface ICreateCategoryDTO {
 }
 
 class CategoriesRepository {
-  private categories: Category[];
+  private categories: CategoryModel[];
 
   constructor() {
     this.categories = [];
@@ -14,7 +14,7 @@ class CategoriesRepository {
 
   create({ name, description }: ICreateCategoryDTO): void {
     // Instanciando classe para poder pegar o ID de constructor
-    const category = new Category();
+    const category = new CategoryModel();
 
     Object.assign(category, {
       name,
@@ -23,6 +23,18 @@ class CategoriesRepository {
     });
 
     this.categories.push(category);
+  }
+
+  findByName(name: string): CategoryModel {
+    const category = this.categories.find((category) => {
+      return category.name === name;
+    });
+
+    return category;
+  }
+
+  list(): CategoryModel[] {
+    return this.categories;
   }
 }
 
