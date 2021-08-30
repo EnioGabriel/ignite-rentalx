@@ -1,8 +1,8 @@
-import CategoryModel from "../model/Category";
+import CategoryModel from "../../model/Category";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from "./ICategoriesRepository";
+} from "../ICategoriesRepository";
 
 // Singleton: cria uma instancia global da classe
 
