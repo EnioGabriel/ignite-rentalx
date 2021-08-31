@@ -36,6 +36,9 @@ class ImportCategoriesUseCase {
           });
         })
         .on("end", () => {
+          // Removendo arquivo armazenado no tmp
+          fs.promises.unlink(file.path);
+
           // Retorna o array com os dados
           resolve(categories);
         })
