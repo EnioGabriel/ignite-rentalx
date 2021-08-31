@@ -1,4 +1,4 @@
-//responsável pela regra de negócio
+// Responsável pela regra de negócio da importação de um arquivo .csv
 
 import fs from "fs";
 import csvParse from "csv-parse";
@@ -48,7 +48,20 @@ class ImportCategoriesUseCase {
 
   async execute(file: Express.Multer.File): Promise<void> {
     const categories = await this.loadCategories(file);
-    console.log(categories);
+
+    categories.map(async (category) => {
+      const { name, description } = category;
+
+      const existCategory = this.categoriesRepository.findByName(name);
+
+      if (!existCategory) {
+        // Armazenando no 'DB' os valores importados do arquivo
+        this.categoriesRepository.create({
+          name,
+          description,
+        });
+      }
+    });
   }
 }
 
