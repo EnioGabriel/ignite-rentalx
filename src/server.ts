@@ -4,6 +4,9 @@ import swaggerUi from "swagger-ui-express";
 
 import swaggerFile from "./swagger.json";
 
+// Importando arquivo index de config do Typeorm
+import "./database";
+
 const app = express();
 
 // Habilita o uso de .json em rotas
