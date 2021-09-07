@@ -1,11 +1,10 @@
 import express from "express";
+// Importando arquivo index de config do Typeorm
+import "./database";
 import { router } from "./routes";
 import swaggerUi from "swagger-ui-express";
 
 import swaggerFile from "./swagger.json";
-
-// Importando arquivo index de config do Typeorm
-import "./database";
 
 const app = express();
 

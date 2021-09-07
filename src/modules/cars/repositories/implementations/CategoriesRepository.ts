@@ -1,18 +1,21 @@
-import CategoryModel from "../../model/Category";
+import CategoryModel from "../../entities/Category";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
 } from "../ICategoriesRepository";
 
+import { getRepository, Repository } from "typeorm";
+
 // Singleton: cria uma instancia global da classe
 
 class CategoriesRepository implements ICategoriesRepository {
-  private categories: CategoryModel[];
+  private repository: Repository<CategoryModel>;
 
   private static INSTANCE: CategoriesRepository;
 
+  // Responsavel pelo armazenamento no BD
   private constructor() {
-    this.categories = [];
+    this.repository = getRepository(CategoryModel);
   }
 
   // Responsavel por criar uma instancia ou repassar uma já existente
@@ -23,29 +26,27 @@ class CategoriesRepository implements ICategoriesRepository {
     return CategoriesRepository.INSTANCE;
   }
 
-  create({ name, description }: ICreateCategoryDTO): void {
-    // Instanciando classe para poder pegar o ID de constructor
-    const category = new CategoryModel();
-
-    Object.assign(category, {
-      name,
+  async create({ name, description }: ICreateCategoryDTO): Promise<void> {
+    const category = this.repository.create({
       description,
-      created_at: new Date(),
+      name,
     });
 
-    this.categories.push(category);
+    await this.repository.save(category);
   }
 
-  findByName(name: string): CategoryModel {
-    const category = this.categories.find((category) => {
-      return category.name === name;
-    });
+  async findByName(name: string): Promise<CategoryModel> {
+    // Select * from categories where name = 'name'
+    const category = await this.repository.findOne({ name });
 
     return category;
   }
 
-  list(): CategoryModel[] {
-    return this.categories;
+  // Lista todas as categorias
+  async list(): Promise<CategoryModel[]> {
+    // Select * from categories
+    const categories = await this.repository.find();
+    return categories;
   }
 }
 
