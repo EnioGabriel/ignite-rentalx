@@ -1,6 +1,7 @@
 import express from "express";
 // Importando arquivo index de config do Typeorm
 import "./database";
+import "./shared/container";
 import { router } from "./routes";
 import swaggerUi from "swagger-ui-express";
 
