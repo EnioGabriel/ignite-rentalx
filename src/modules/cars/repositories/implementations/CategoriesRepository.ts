@@ -11,19 +11,9 @@ import { getRepository, Repository } from "typeorm";
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<CategoryModel>;
 
-  private static INSTANCE: CategoriesRepository;
-
-  // Responsavel pelo armazenamento no BD
-  private constructor() {
+  // Responsável pelo armazenamento no BD
+  constructor() {
     this.repository = getRepository(CategoryModel);
-  }
-
-  // Responsavel por criar uma instancia ou repassar uma já existente
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-    return CategoriesRepository.INSTANCE;
   }
 
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
