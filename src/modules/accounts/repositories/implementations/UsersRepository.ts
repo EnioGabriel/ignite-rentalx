@@ -1,3 +1,4 @@
+// Responsável por salvar infos no DB
 import { getRepository, Repository } from "typeorm";
 
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
