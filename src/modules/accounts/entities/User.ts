@@ -21,6 +21,10 @@ class User {
   @Column()
   isAdmin: string;
 
+  // Refatorar usuario com coluna avatar
+  @Column()
+  avatar: string;
+
   @CreateDateColumn()
   created_at: string;
 
