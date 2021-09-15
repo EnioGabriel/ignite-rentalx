@@ -2,13 +2,13 @@ import express, { NextFunction, Request, Response } from "express";
 // Responsável por continuar a aplicação após ocorrer um erro
 import "express-async-errors";
 // Importando arquivo index de config do Typeorm
-import "./database";
+import "@shared/infra/typeorm";
 import "@shared/container";
 import { router } from "./routes";
 import swaggerUi from "swagger-ui-express";
 
-import swaggerFile from "./swagger.json";
-import { AppError } from "@errors/AppError";
+import swaggerFile from "../../../swagger.json";
+import { AppError } from "@shared/errors/AppError";
 
 const app = express();
 
