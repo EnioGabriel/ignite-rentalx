@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 // Responsável por continuar a aplicação após ocorrer um erro
 import "express-async-errors";
 // Importando arquivo index de config do Typeorm
-import "@shared/infra/typeorm";
+import "@shared/infra/typeorm/index";
 import "@shared/container";
 import { router } from "./routes";
 import swaggerUi from "swagger-ui-express";
@@ -10,7 +10,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerFile from "../../../swagger.json";
 import { AppError } from "@shared/errors/AppError";
 
-import createConnection from "@shared/infra/typeorm";
+import createConnection from "@shared/infra/typeorm/index";
 
 createConnection();
 
