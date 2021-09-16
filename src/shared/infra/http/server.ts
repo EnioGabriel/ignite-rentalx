@@ -10,6 +10,10 @@ import swaggerUi from "swagger-ui-express";
 import swaggerFile from "../../../swagger.json";
 import { AppError } from "@shared/errors/AppError";
 
+import createConnection from "@shared/infra/typeorm";
+
+createConnection();
+
 const app = express();
 
 // Habilita o uso de .json em rotas
