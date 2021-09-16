@@ -40,6 +40,37 @@ class CarsRepository implements ICarsRepository {
     });
     return car;
   }
+
+  async findAvailable(
+    brand?: string,
+    category_id?: string,
+    name?: string
+  ): Promise<Car[]> {
+    const carsQuery = await this.repository
+      // "c" => alias (apelido) dado para a busca
+      .createQueryBuilder("c")
+      .where("available = :available", { available: true });
+
+    // verifica se está preenchido (algum valor foi passado por parametro)
+    if (brand) {
+      carsQuery.andWhere("brand = :brand", { brand });
+    }
+
+    // verifica se está preenchido  (algum valor foi passado por parametro)
+    if (name) {
+      carsQuery.andWhere("name = :name", { name });
+    }
+
+    // verifica se está preenchido  (algum valor foi passado por parametro)
+    if (category_id) {
+      carsQuery.andWhere("category_id = :category_id", { category_id });
+    }
+
+    // pega os objetos armazenados nas buscas da query
+    const cars = await carsQuery.getMany();
+
+    return cars;
+  }
 }
 
 export { CarsRepository };
