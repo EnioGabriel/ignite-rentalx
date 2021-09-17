@@ -55,7 +55,7 @@ class Car {
     // nome da outra coluna em specifications_cars que referencia a tabela de specification
     inverseJoinColumns: [{ name: "specification_id" }],
   })
-  specification: Specification[];
+  specifications: Specification[];
 
   @CreateDateColumn()
   created_at: Date;
